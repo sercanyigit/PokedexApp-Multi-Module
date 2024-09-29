@@ -1,27 +1,17 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.kotlinKsp)
-    alias(libs.plugins.compose.compiler)
 }
 
 android {
-    namespace = "com.sercan.yigit.pokedexapp"
+    namespace = "com.sercan.yigit.core"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.sercan.yigit.pokedexapp"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -39,17 +29,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "2.0.0"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+        freeCompilerArgs = listOf("-Xuse-ir")
     }
 }
 
@@ -64,19 +44,10 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
-    implementation(libs.navigation.compose)
-    implementation(libs.splashscreen)
-    implementation(libs.accompanist.systemuicontroller)
-    implementation(libs.hilt.navigation.compose)
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.runtime.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
-
-    //implementation(project(":core"))
 }
