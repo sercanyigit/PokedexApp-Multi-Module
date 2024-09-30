@@ -78,5 +78,6 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 
-    //implementation(project(":core"))
+    implementation(project(":core:common"))
+    implementation(project(":core:network"))
 }

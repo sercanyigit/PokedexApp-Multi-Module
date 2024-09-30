@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.sercan.yigit.core"
+    namespace = "com.sercan.yigit.common"
     compileSdk = 34
 
     defaultConfig {
@@ -29,24 +29,19 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        freeCompilerArgs = listOf("-Xuse-ir")
     }
 }
 
 dependencies {
 
     implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.appcompat)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
-    implementation(libs.material.icons.extended)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.runtime.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
