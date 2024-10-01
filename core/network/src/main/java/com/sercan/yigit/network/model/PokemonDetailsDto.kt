@@ -9,5 +9,5 @@ data class PokemonDetailsDto(
     @SerialName("name") val name: String,
     @SerialName("height") val height: Int,
     @SerialName("weight") val weight: Int,
-    @SerialName("types") val types: List<Type>,
+    @SerialName("types") val types: List<Type>
 )

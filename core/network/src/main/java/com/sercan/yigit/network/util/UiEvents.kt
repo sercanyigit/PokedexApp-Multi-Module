@@ -1,4 +1,4 @@
-package com.sercan.yigit.common
+package com.sercan.yigit.network.util
 
 sealed class UiEvents<T>(val data:T? = null, val message: String? = null) {
     class Loading<T>: UiEvents<T>()
