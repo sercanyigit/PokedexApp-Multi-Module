@@ -3,14 +3,12 @@ package com.sercan.yigit.pokemonlist.presentation.screen
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,8 +19,6 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.SyncAlt
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.typography
@@ -44,20 +40,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import coil.compose.SubcomposeAsyncImage
-import com.sercan.yigit.common.utils.getEmptyList
-import com.sercan.yigit.common.utils.getErrorList
-import com.sercan.yigit.common.utils.getPokemonImage
-import com.sercan.yigit.common.utils.isNumeric
-import com.sercan.yigit.common.utils.titleCase
 import com.sercan.yigit.common.utils.ColorBackground
-import com.sercan.yigit.common.utils.ColorIconSearchBackground
-import com.sercan.yigit.common.utils.ColorIconSearchBorder
-import com.sercan.yigit.common.utils.ColorLazyGridItem
 import com.sercan.yigit.common.utils.ColorTextFieldContainerDefault
 import com.sercan.yigit.common.utils.ColorTextFieldText
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.common.utils.ColorTextTitle
+import com.sercan.yigit.common.utils.getEmptyList
+import com.sercan.yigit.common.utils.getErrorList
+import com.sercan.yigit.pokemonlist.presentation.component.PokemonListItem
 
 @Composable
 fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
@@ -88,13 +78,6 @@ fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
                     fontWeight = FontWeight.Bold,
                     style = typography.headlineMedium
                 )
-                Text(
-                    text = "Search for a Pokémon by name or using its National Pokédex number.",
-                    color = ColorTextTitle,
-                    modifier = Modifier
-                        .padding(top = 4.dp),
-                    style = typography.bodyMedium
-                )
                 Row(
                     modifier = Modifier
                         .height(IntrinsicSize.Min)
@@ -102,8 +85,7 @@ fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
                         .padding(top = 16.dp, bottom = 16.dp)
                 ) {
                     TextField(
-                        modifier = Modifier
-                            .weight(4f),
+                        modifier = Modifier.weight(4f),
                         value = query.value,
                         onValueChange = {
                             viewModel.setQuery(it)
@@ -127,41 +109,6 @@ fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
                         },
                         placeholder = { Text(text = "Name or number") }
                     )
-                    Card(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxHeight()
-                            .padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
-                            .clickable {
-                                if (isNumeric(query.value)) {
-                                    navController.navigate("pokemon_details/${query.value}")
-                                } else if (query.value.isBlank()) {
-                                    navController.navigate("pokemon_details/${0}")
-                                } else {
-                                    val pokemonNumber =
-                                        result.data?.indexOfFirst { it.name == query.value } ?: 0
-                                    val queryPokemonNumber = pokemonNumber + 1
-                                    navController.navigate("pokemon_details/${queryPokemonNumber}")
-                                }
-                            },
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .background(color = ColorIconSearchBackground)
-                                .border(2.dp, ColorIconSearchBorder)
-                                .fillMaxWidth()
-                                .fillMaxHeight()
-                        ) {
-                            Icon(
-                                modifier = Modifier
-                                    .align(Alignment.Center),
-                                imageVector = Icons.Default.SyncAlt,
-                                tint = ColorBackground,
-                                contentDescription = null
-                            )
-                        }
-                    }
                 }
             }
         }) { screen ->
@@ -237,69 +184,9 @@ fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
                         .padding(top = 180.dp, start = 16.dp, end = 16.dp),
                     columns = GridCells.Fixed(2),
                     content = {
-                        itemsIndexed(it) { index, it ->
-                            val pokemonNumber = it.id
-                            Card(
-                                modifier = Modifier
-                                    .height(212.dp)
-                                    .padding(8.dp)
-                                    .clickable {
-                                        navController.navigate("pokemon_details/${pokemonNumber}")
-                                    },
-                                shape = RoundedCornerShape(16.dp),
-                            ) {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .fillMaxHeight()
-                                        .background(ColorLazyGridItem[index % ColorLazyGridItem.size])
-                                ) {
-                                    SubcomposeAsyncImage(
-                                        modifier = Modifier
-                                            .padding(
-                                                top = 8.dp,
-                                                bottom = 8.dp,
-                                                start = 20.dp,
-                                                end = 20.dp
-                                            )
-                                            .fillMaxWidth()
-                                            .height(130.dp),
-                                        alignment = Alignment.Center,
-                                        model = getPokemonImage(pokemonNumber),
-                                        contentDescription = null,
-                                        contentScale = ContentScale.Fit,
-                                        loading = { LoadingAnimation() }
-                                    )
-
-                                    Text(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(
-                                                start = 12.dp,
-                                                end = 12.dp
-                                            ),
-                                        text = it.name.titleCase(),
-                                        maxLines = 1,
-                                        color = ColorTextItems,
-                                        textAlign = TextAlign.Center,
-                                        fontWeight = FontWeight.Bold,
-                                        style = typography.bodyLarge
-                                    )
-                                    Text(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(
-                                                start = 12.dp,
-                                                end = 12.dp
-                                            ),
-                                        text = pokemonNumber.padStart(3, '0'),
-                                        maxLines = 1,
-                                        color = ColorTextItems,
-                                        textAlign = TextAlign.Center,
-                                        style = typography.bodyMedium
-                                    )
-                                }
-                            }
+                        itemsIndexed(it) { index, pokemon ->
+                            val pokemonNumber = pokemon.id
+                            PokemonListItem(navController, index, pokemonNumber, pokemon)
                         }
                     }
                 )

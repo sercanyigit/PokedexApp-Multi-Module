@@ -36,19 +36,5 @@ open class BaseViewModel(context: Context) : ViewModel() {
                 _isConnected.value = false
             }
         })
-
-        fetchDataFromApi()
-    }
-
-    private fun fetchDataFromApi() {
-        viewModelScope.launch {
-            _uiState.value = UiState.Loading
-            delay(2000)
-            if (_isConnected.value) {
-                _uiState.value = UiState.Success("get success data")
-            } else {
-                _uiState.value = UiState.Error("error")
-            }
-        }
     }
 }
