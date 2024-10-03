@@ -25,4 +25,4 @@ include(":core:common")
 include(":core:network")
 include(":core:navigation")
 include(":feature:pokemonList")
-
+include(":feature:pokemonDetails")
