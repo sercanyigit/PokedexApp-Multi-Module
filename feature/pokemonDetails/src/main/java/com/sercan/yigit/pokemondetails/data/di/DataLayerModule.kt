@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
 @Module
-object DataModule {
+object DataLayerModule {
 
     @Provides
     fun providePokemonDetailsRepository(pokemonDataProviders: PokemonDataProviders): PokemonDetailsRepository {

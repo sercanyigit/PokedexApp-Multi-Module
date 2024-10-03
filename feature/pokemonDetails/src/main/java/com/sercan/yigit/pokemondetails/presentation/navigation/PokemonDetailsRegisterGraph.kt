@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
-import com.sercan.yigit.common.utils.PokemonDetailsFeature
+import com.sercan.yigit.navigation.PokemonDetailsFeature
 import com.sercan.yigit.navigation.NavigationBuilder
 import com.sercan.yigit.pokemondetails.presentation.screen.PokemonDetailsScreen
 

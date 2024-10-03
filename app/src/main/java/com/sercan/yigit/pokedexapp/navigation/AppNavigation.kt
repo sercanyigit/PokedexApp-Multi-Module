@@ -3,7 +3,7 @@ package com.sercan.yigit.pokedexapp.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.sercan.yigit.common.utils.PokemonFeature
+import com.sercan.yigit.navigation.PokemonFeature
 
 @Composable
 fun AppNavGraph(

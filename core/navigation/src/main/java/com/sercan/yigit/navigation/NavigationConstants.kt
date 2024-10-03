@@ -1,4 +1,4 @@
-package com.sercan.yigit.common.utils
+package com.sercan.yigit.navigation
 
 object PokemonFeature {
     const val nestedRoute = "pokemon_list_route"
