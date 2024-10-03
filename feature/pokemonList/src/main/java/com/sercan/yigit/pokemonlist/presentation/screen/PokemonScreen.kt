@@ -19,7 +19,6 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
@@ -28,6 +27,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,19 +40,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.sercan.yigit.common.base.BaseComposableView
 import com.sercan.yigit.common.utils.ColorBackground
 import com.sercan.yigit.common.utils.ColorTextFieldContainerDefault
 import com.sercan.yigit.common.utils.ColorTextFieldText
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.common.utils.ColorTextTitle
 import com.sercan.yigit.common.utils.getEmptyList
-import com.sercan.yigit.common.utils.getErrorList
 import com.sercan.yigit.pokemonlist.presentation.component.PokemonListItem
 
 @Composable
 fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
 
-    val result = viewModel.pokemonList.value
+    val result by viewModel.pokemonList.collectAsState()
     val query = viewModel.query.collectAsState()
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -114,53 +114,14 @@ fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
         }) { screen ->
         Log.e("TAG", "PokemonScreen: $screen")
 
-        if (result.isLoading) {
-            Box(modifier = Modifier
-                .background(color = ColorBackground).fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
-        }
-        if (result.error.isNotBlank()) {
-            Box(modifier = Modifier
-                .background(color = ColorBackground).fillMaxSize(), contentAlignment = Alignment.Center) {
-                Column {
-                    AsyncImage(
-                        modifier = Modifier
-                            .padding(
-                                top = 8.dp,
-                                bottom = 8.dp,
-                                start = 20.dp,
-                                end = 20.dp
-                            )
-                            .fillMaxWidth()
-                            .height(130.dp),
-                        alignment = Alignment.Center,
-                        model = getErrorList(),
-                        contentDescription = null,
-                        contentScale = ContentScale.Fit
-                    )
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = "Oops! There was a problem\nPlease come back again later.",
-                        color = ColorTextItems,
-                        textAlign = TextAlign.Center,
-                        style = typography.titleMedium
-                    )
-                }
-            }
-        }
+        BaseComposableView(uiState = viewModel.pokemonList)
         result.data?.let {
             if (it.isEmpty()) {
                 Box(modifier = Modifier.background(color = ColorBackground).fillMaxSize(), contentAlignment = Alignment.Center) {
                     Column {
                         AsyncImage(
                             modifier = Modifier
-                                .padding(
-                                    top = 8.dp,
-                                    bottom = 8.dp,
-                                    start = 20.dp,
-                                    end = 20.dp
-                                )
+                                .padding(top = 8.dp, bottom = 8.dp, start = 20.dp, end = 20.dp)
                                 .fillMaxWidth()
                                 .height(130.dp),
                             alignment = Alignment.Center,

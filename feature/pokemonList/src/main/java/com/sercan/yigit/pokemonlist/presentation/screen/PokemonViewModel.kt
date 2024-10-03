@@ -24,8 +24,8 @@ class PokemonViewModel @Inject constructor(
     private val getPokemonListUseCase: GetPokemonListUseCase
 ) : ViewModel() {
 
-    private val _pokemonList = mutableStateOf(StateHolder<List<Pokemon>>())
-    val pokemonList: State<StateHolder<List<Pokemon>>> get() = _pokemonList
+    private val _pokemonList = MutableStateFlow(StateHolder<List<Pokemon>>())
+    val pokemonList: StateFlow<StateHolder<List<Pokemon>>> get() = _pokemonList
 
     private val _query: MutableStateFlow<String> = MutableStateFlow("")
     val query: StateFlow<String> get() = _query

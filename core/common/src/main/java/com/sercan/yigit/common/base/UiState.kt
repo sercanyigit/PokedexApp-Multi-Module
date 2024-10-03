@@ -1,4 +1,4 @@
-package com.sercan.yigit.pokedexapp.base
+package com.sercan.yigit.common.base
 
 sealed class UiState<out T> {
     object Loading : UiState<Nothing>()

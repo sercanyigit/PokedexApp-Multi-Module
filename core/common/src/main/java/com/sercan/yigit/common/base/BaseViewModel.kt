@@ -1,4 +1,4 @@
-package com.sercan.yigit.pokedexapp.base
+package com.sercan.yigit.common.base
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -7,20 +7,14 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 open class BaseViewModel(context: Context) : ViewModel() {
     private val connectivityManager = getSystemService(context, ConnectivityManager::class.java)
 
     private val _isConnected = MutableStateFlow<Boolean>(false)
     val isConnected: StateFlow<Boolean> = _isConnected
-
-    private val _uiState = MutableStateFlow<UiState<String>>(UiState.Loading)
-    val uiState: StateFlow<UiState<String>> = _uiState
 
     init {
         val networkRequest = NetworkRequest.Builder()
