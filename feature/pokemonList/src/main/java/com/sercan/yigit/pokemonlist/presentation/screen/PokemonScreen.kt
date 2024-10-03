@@ -38,6 +38,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.sercan.yigit.common.base.BaseComposableView
@@ -50,8 +51,9 @@ import com.sercan.yigit.common.utils.getEmptyList
 import com.sercan.yigit.pokemonlist.presentation.component.PokemonListItem
 
 @Composable
-fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
+fun PokemonScreen(navController: NavController) {
 
+    val viewModel = hiltViewModel<PokemonViewModel>()
     val result by viewModel.pokemonList.collectAsState()
     val query = viewModel.query.collectAsState()
     val keyboardController = LocalSoftwareKeyboardController.current

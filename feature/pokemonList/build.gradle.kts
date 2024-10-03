@@ -39,7 +39,6 @@ dependencies {
 
     implementation(project(":core:network"))
     implementation(project(":core:common"))
-    implementation(project(":core:navigation"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)

@@ -23,5 +23,4 @@ rootProject.name = "PokedexApp"
 include(":app")
 include(":core:common")
 include(":core:network")
-include(":core:navigation")
 include(":feature:pokemonList")

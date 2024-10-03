@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -80,6 +81,5 @@ dependencies {
 
     implementation(project(":core:common"))
     implementation(project(":core:network"))
-    implementation(project(":core:navigation"))
     implementation(project(":feature:pokemonList"))
 }
