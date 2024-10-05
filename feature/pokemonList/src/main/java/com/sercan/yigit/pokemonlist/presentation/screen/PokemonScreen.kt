@@ -49,6 +49,7 @@ import com.sercan.yigit.common.utils.ColorTextFieldText
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.common.utils.ColorTextTitle
 import com.sercan.yigit.pokemonlist.presentation.component.PokemonListItem
+import com.sercan.yigit.pokemonlist.presentation.component.TopBarComponent
 
 @Composable
 fun PokemonScreen(navController: NavController) {
@@ -66,60 +67,19 @@ fun PokemonScreen(navController: NavController) {
                 keyboardController?.hide()
             },
         topBar = {
-            Column(
-                modifier = Modifier
-                    .background(color = ColorBackground)
-                    .fillMaxWidth()
-                    .padding(start = 24.dp, end = 24.dp)
-            ) {
-                Text(
-                    text = "Pokédex",
-                    color = ColorTextTitle,
-                    modifier = Modifier
-                        .padding(top = 20.dp),
-                    fontWeight = FontWeight.Bold,
-                    style = typography.headlineMedium
-                )
-                Row(
-                    modifier = Modifier
-                        .height(IntrinsicSize.Min)
-                        .fillMaxWidth()
-                        .padding(top = 16.dp, bottom = 16.dp)
-                ) {
-                    TextField(
-                        modifier = Modifier.weight(4f),
-                        value = query.value,
-                        onValueChange = {
-                            viewModel.setQuery(it)
-                        },
-                        colors = TextFieldDefaults.colors(
-                            unfocusedTextColor = ColorTextFieldText,
-                            focusedContainerColor = ColorTextFieldContainerDefault,
-                            unfocusedContainerColor = ColorTextFieldContainerDefault,
-                            disabledContainerColor = ColorTextFieldContainerDefault,
-                            focusedIndicatorColor = Color.Transparent,
-                            unfocusedIndicatorColor = Color.Transparent,
-                            disabledIndicatorColor = Color.Transparent,
-                        ),
-                        shape = RoundedCornerShape(12.dp),
-                        singleLine = true,
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = null
-                            )
-                        },
-                        placeholder = { Text(text = "Arama yap...") }
-                    )
-                }
-            }
+            TopBarComponent(viewModel = viewModel, query = query)
         }) { screen ->
         Log.e("TAG", "PokemonScreen: $screen")
 
         BaseComposableView(uiState = viewModel.pokemonList)
         result.data?.let {
             if (it.isEmpty()) {
-                Box(modifier = Modifier.background(color = ColorBackground).fillMaxSize(), contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier
+                        .background(color = ColorBackground)
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
                     Column {
                         LottieAnimationComponent(
                             animationFileName = R.raw.bulbasaur,

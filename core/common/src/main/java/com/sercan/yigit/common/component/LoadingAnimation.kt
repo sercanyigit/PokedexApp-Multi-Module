@@ -1,4 +1,4 @@
-package com.sercan.yigit.pokemondetails.presentation.component
+package com.sercan.yigit.common.component
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -34,10 +34,6 @@ fun LoadingAnimation() {
             .size(60.dp)
             .scale(progress)
             .alpha(1f - progress)
-            .border(
-                5.dp,
-                color = Color.Black,
-                shape = CircleShape
-            )
+            .border(5.dp, color = Color.Black, shape = CircleShape)
     )
 }

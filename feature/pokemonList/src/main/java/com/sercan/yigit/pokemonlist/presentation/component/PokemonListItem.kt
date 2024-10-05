@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
+import com.sercan.yigit.common.component.LoadingAnimation
 import com.sercan.yigit.common.utils.ColorLazyGridItem
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.common.utils.getPokemonImage

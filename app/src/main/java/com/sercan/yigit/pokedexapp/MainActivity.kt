@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.sercan.yigit.common.R
 import com.sercan.yigit.common.component.LottieAnimationComponent
+import com.sercan.yigit.common.component.NetworkConnectionComponent
 import com.sercan.yigit.common.utils.ColorBackground
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.pokedexapp.navigation.AppNavGraph
@@ -50,38 +51,11 @@ class MainActivity : ComponentActivity() {
                 viewModel.observeNetworkConnectivity()
                 val connection by viewModel.isConnected.collectAsState()
 
-                if (connection.not()) {
-                    Box(
-                        modifier = Modifier
-                            .background(color = ColorBackground)
-                            .fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column {
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                text = "Bağlantı Sorunu :(",
-                                color = ColorTextItems,
-                                textAlign = TextAlign.Center,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 30.sp,
-                            )
-                            LottieAnimationComponent(
-                                animationFileName = R.raw.pikachu
-                            )
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                text = "Oops! İnternet bağlantını kontrol et.",
-                                color = ColorTextItems,
-                                textAlign = TextAlign.Center,
-                                style = typography.titleMedium,
-                                fontSize = 24.sp,
-                            )
-                        }
-                    }
-                } else {
+                if (connection) {
                     val navController = rememberNavController()
                     App(navHostController = navController, navigationProvider)
+                } else {
+                    NetworkConnectionComponent()
                 }
             }
         }
@@ -108,4 +82,3 @@ class MainActivity : ComponentActivity() {
 
     }
 }
-
