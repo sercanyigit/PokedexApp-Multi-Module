@@ -24,6 +24,7 @@ kotlinx-serialization-json = "1.6.3"
 kotlin-plugin-serialization = "1.9.22"
 accompanist-systemuicontroller = "0.27.0"
 runtimeAndroid = "1.6.7"
+lottie = "6.5.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -56,6 +57,7 @@ material-icons-extended = { group = "androidx.compose.material", name = "materia
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen"}
 accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist-systemuicontroller"}
 androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
+lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

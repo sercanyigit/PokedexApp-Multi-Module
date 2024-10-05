@@ -31,7 +31,7 @@ class PokemonDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getPokemonDetails(id: String) {
+    private fun getPokemonDetails(id: String) {
         getPokemonDetailsUseCase(id).onEach {
             when (it) {
                 is UiEvents.Loading -> {

@@ -1,7 +1,5 @@
 package com.sercan.yigit.pokemonlist.presentation.screen
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sercan.yigit.common.utils.isNumeric
@@ -42,7 +40,7 @@ class PokemonViewModel @Inject constructor(
         _query.value = s
     }
 
-    fun getPokemonList() = viewModelScope.launch {
+    private fun getPokemonList() = viewModelScope.launch {
         getPokemonListUseCase().onEach {
             when(it) {
                 is UiEvents.Loading -> {

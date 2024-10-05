@@ -38,10 +38,8 @@ import com.sercan.yigit.common.base.BaseComposableView
 import com.sercan.yigit.common.utils.ColorBackground
 import com.sercan.yigit.common.utils.ColorPastel3
 import com.sercan.yigit.common.utils.ColorPokemonTypeMap
-import com.sercan.yigit.common.utils.ColorShiny
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.common.utils.getPokemonImage
-import com.sercan.yigit.common.utils.getPokemonShinyImage
 import com.sercan.yigit.common.utils.titleCase
 import com.sercan.yigit.pokemondetails.presentation.component.LoadingAnimation
 
@@ -161,37 +159,6 @@ fun PokemonDetailsScreen(
                     color = ColorTextItems,
                     style = MaterialTheme.typography.titleMedium
                 )
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 32.dp, end = 32.dp, top = 4.dp),
-                    text = "Shiny: ",
-                    color = ColorTextItems,
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Card(
-                    modifier = Modifier
-                        .width(180.dp)
-                        .height(120.dp)
-                        .padding(start = 32.dp, end = 32.dp, top = 16.dp),
-                    shape = RoundedCornerShape(16.dp),
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(ColorShiny)
-                    ) {
-                        SubcomposeAsyncImage(
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .fillMaxSize(),
-                            model = getPokemonShinyImage(id),
-                            contentDescription = null,
-                            contentScale = ContentScale.Fit,
-                            loading = { LoadingAnimation() }
-                        )
-                    }
-                }
             }
         }
     }

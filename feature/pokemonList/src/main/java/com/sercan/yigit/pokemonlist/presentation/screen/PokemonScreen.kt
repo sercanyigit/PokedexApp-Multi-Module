@@ -33,21 +33,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
+import com.sercan.yigit.common.R
 import com.sercan.yigit.common.base.BaseComposableView
+import com.sercan.yigit.common.component.LottieAnimationComponent
 import com.sercan.yigit.common.utils.ColorBackground
 import com.sercan.yigit.common.utils.ColorTextFieldContainerDefault
 import com.sercan.yigit.common.utils.ColorTextFieldText
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.common.utils.ColorTextTitle
-import com.sercan.yigit.common.utils.getEmptyList
 import com.sercan.yigit.pokemonlist.presentation.component.PokemonListItem
 
 @Composable
@@ -109,7 +108,7 @@ fun PokemonScreen(navController: NavController) {
                                 contentDescription = null
                             )
                         },
-                        placeholder = { Text(text = "Name or number") }
+                        placeholder = { Text(text = "Arama yap...") }
                     )
                 }
             }
@@ -121,19 +120,12 @@ fun PokemonScreen(navController: NavController) {
             if (it.isEmpty()) {
                 Box(modifier = Modifier.background(color = ColorBackground).fillMaxSize(), contentAlignment = Alignment.Center) {
                     Column {
-                        AsyncImage(
-                            modifier = Modifier
-                                .padding(top = 8.dp, bottom = 8.dp, start = 20.dp, end = 20.dp)
-                                .fillMaxWidth()
-                                .height(130.dp),
-                            alignment = Alignment.Center,
-                            model = getEmptyList(),
-                            contentDescription = null,
-                            contentScale = ContentScale.Fit
+                        LottieAnimationComponent(
+                            animationFileName = R.raw.bulbasaur
                         )
                         Text(
                             modifier = Modifier.fillMaxWidth(),
-                            text = "Pokemon Not Found",
+                            text = "Pokemon Bulunamadı",
                             color = ColorTextItems,
                             textAlign = TextAlign.Center,
                             style = typography.titleMedium

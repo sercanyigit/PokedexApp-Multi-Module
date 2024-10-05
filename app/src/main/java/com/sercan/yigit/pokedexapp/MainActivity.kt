@@ -17,12 +17,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.sercan.yigit.common.R
+import com.sercan.yigit.common.component.LottieAnimationComponent
 import com.sercan.yigit.common.utils.ColorBackground
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.pokedexapp.navigation.AppNavGraph
@@ -53,6 +57,17 @@ class MainActivity : ComponentActivity() {
                         contentAlignment = Alignment.Center
                     ) {
                         Column {
+                            Text(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = "Bağlantı Sorunu :(",
+                                color = ColorTextItems,
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 30.sp,
+                            )
+                            LottieAnimationComponent(
+                                animationFileName = R.raw.pikachu
+                            )
                             Text(
                                 modifier = Modifier.fillMaxWidth(),
                                 text = "Oops! İnternet bağlantını kontrol et.",

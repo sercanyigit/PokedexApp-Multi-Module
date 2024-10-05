@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +14,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.sercan.yigit.common.R
+import com.sercan.yigit.common.component.LottieAnimationComponent
 import com.sercan.yigit.common.utils.ColorBackground
 import com.sercan.yigit.common.utils.ColorTextItems
 import com.sercan.yigit.network.util.StateHolder
@@ -33,13 +36,20 @@ fun <T> BaseComposableView(
         if (state.isLoading) {
             Box(modifier = Modifier
                 .background(color = ColorBackground).fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+                LottieAnimationComponent(
+                    animationFileName = R.raw.pokeball,
+                    modifier = Modifier.size(110.dp)
+                )
             }
         }
         if (state.error.isNotBlank()) {
             Box(modifier = Modifier
                 .background(color = ColorBackground).fillMaxSize(), contentAlignment = Alignment.Center) {
                 Column {
+                    LottieAnimationComponent(
+                        animationFileName = R.raw.bulbasaur,
+                        modifier = Modifier.size(110.dp)
+                    )
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = "Oops! Bir problem oluştu.",
