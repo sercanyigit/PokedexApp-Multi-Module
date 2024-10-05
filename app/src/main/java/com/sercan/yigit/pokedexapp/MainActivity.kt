@@ -47,6 +47,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PokedexAppTheme {
                 val viewModel = hiltViewModel<MainViewModel>()
+                viewModel.observeNetworkConnectivity()
                 val connection by viewModel.isConnected.collectAsState()
 
                 if (connection.not()) {
@@ -73,7 +74,8 @@ class MainActivity : ComponentActivity() {
                                 text = "Oops! İnternet bağlantını kontrol et.",
                                 color = ColorTextItems,
                                 textAlign = TextAlign.Center,
-                                style = typography.titleMedium
+                                style = typography.titleMedium,
+                                fontSize = 24.sp,
                             )
                         }
                     }

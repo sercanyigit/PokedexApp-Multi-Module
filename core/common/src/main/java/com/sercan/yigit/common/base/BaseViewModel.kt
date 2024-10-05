@@ -18,11 +18,7 @@ open class BaseViewModel(context: Context) : ViewModel() {
     private val _isConnected = MutableStateFlow(false)
     val isConnected: StateFlow<Boolean> = _isConnected
 
-    init {
-        observeNetworkConnectivity()
-    }
-
-    private fun observeNetworkConnectivity() {
+    fun observeNetworkConnectivity() {
         val networkRequest = NetworkRequest.Builder()
             .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
             .build()

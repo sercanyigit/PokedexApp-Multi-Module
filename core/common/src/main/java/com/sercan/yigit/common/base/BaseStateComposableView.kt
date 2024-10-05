@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.sercan.yigit.common.R
 import com.sercan.yigit.common.component.LottieAnimationComponent
 import com.sercan.yigit.common.utils.ColorBackground
@@ -55,7 +56,8 @@ fun <T> BaseComposableView(
                         text = "Oops! Bir problem oluştu.",
                         color = ColorTextItems,
                         textAlign = TextAlign.Center,
-                        style = typography.titleMedium
+                        style = typography.titleMedium,
+                        fontSize = 26.sp,
                     )
                 }
             }

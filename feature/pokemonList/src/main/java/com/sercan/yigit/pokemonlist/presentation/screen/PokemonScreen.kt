@@ -37,6 +37,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.sercan.yigit.common.R
@@ -121,14 +122,17 @@ fun PokemonScreen(navController: NavController) {
                 Box(modifier = Modifier.background(color = ColorBackground).fillMaxSize(), contentAlignment = Alignment.Center) {
                     Column {
                         LottieAnimationComponent(
-                            animationFileName = R.raw.bulbasaur
+                            animationFileName = R.raw.bulbasaur,
+                            modifier = Modifier.padding(30.dp)
                         )
                         Text(
                             modifier = Modifier.fillMaxWidth(),
-                            text = "Pokemon Bulunamadı",
+                            text = "Pokemon Bulunamadı !!!",
                             color = ColorTextItems,
                             textAlign = TextAlign.Center,
-                            style = typography.titleMedium
+                            style = typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 24.sp,
                         )
                     }
                 }
