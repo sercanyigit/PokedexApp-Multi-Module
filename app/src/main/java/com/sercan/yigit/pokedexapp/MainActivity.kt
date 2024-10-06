@@ -51,11 +51,13 @@ class MainActivity : ComponentActivity() {
                 viewModel.observeNetworkConnectivity()
                 val connection by viewModel.isConnected.collectAsState()
 
-                if (connection) {
-                    val navController = rememberNavController()
-                    App(navHostController = navController, navigationProvider)
-                } else {
-                    NetworkConnectionComponent()
+                connection?.let {
+                    if (it) {
+                        val navController = rememberNavController()
+                        App(navHostController = navController, navigationProvider)
+                    } else {
+                        NetworkConnectionComponent()
+                    }
                 }
             }
         }

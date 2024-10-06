@@ -15,8 +15,8 @@ open class BaseViewModel(context: Context) : ViewModel() {
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
-    private val _isConnected = MutableStateFlow(false)
-    val isConnected: StateFlow<Boolean> = _isConnected
+    private val _isConnected = MutableStateFlow<Boolean?>(null)
+    val isConnected: StateFlow<Boolean?> = _isConnected
 
     fun observeNetworkConnectivity() {
         val networkRequest = NetworkRequest.Builder()
